@@ -23,6 +23,14 @@ const Navbar = async () => {
                     Home
                 </Link>
             </div>
+            <div className="hidden sm:flex items-center gap-6">
+                <Link
+                    className="text-sm font-medium hover:text-blue-500 transition-colors"
+                    href='/recipes'
+                >
+                    Recipes
+                </Link>
+            </div>
              <div className="hidden sm:flex items-center gap-6">
                 <Link
                     className="text-sm font-medium hover:text-blue-500 transition-colors"

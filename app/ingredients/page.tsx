@@ -1,15 +1,7 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { prisma } from "../utils/db"
-import { redirect } from "next/navigation";
 
 const Ingredients = async() => {
-  const {getUser} = getKindeServerSession();
 
-  const user = await getUser();
-
-  if (!user) {
-    return redirect('/api/auth/register')
-  }
 
   const data = await prisma.ingredient.findMany({
     select: {
