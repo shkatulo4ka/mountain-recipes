@@ -1,52 +1,44 @@
+import { createRecipeAction, getCategoryAction } from "@/app/_actions/recipeActions";
 import { prisma } from "@/app/utils/db";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue  } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 
 
 export default async function CreateRecipe() {
-    const categories = await prisma.category.findMany({
-        select:{
-            name: true,
-            id: true
-        }
-    });
-    console.log(categories)
+    const categories = await getCategoryAction();
 
     return(
         <div className="m-2">
-            <Card>
+            <Card className="max-w-lg mx-auto">
                 <CardHeader>
                     <CardTitle>Create Recipe</CardTitle>
                     <CardDescription>Create your own recipe</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form className="flex flex-col gap-2">
+                    <form className="flex flex-col gap-2" action={createRecipeAction}>
                         <div className="flex flex-col gap-2">
                             <Label>Название</Label>
-                            <Input />
+                            <Input name="name" required type="text" placeholder="Введи название"/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <Label>Категория</Label>
-                            <Select>
+                            <Select name="categoryId">
                                 <SelectTrigger>
                                     <SelectValue placeholder="Выбери категорию"/>
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {categories.map(({id, name}) => (
-                                        <SelectItem key={id} value={name}>
+                                    {categories.map(({name, id}) => (
+                                        <SelectItem key={id} value={id}>
                                             {name}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
                             </Select>
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <Label>Приготовление</Label>
-                            <Textarea />
-                        </div>
+                        <Button>Создать</Button>
                     </form>
                 </CardContent>
             </Card>
