@@ -4,8 +4,9 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "../utils/db";
 import { redirect } from "next/navigation";
 
+const {getUser} = getKindeServerSession();
+
 export async function createRecipeAction(formData: FormData) {
-    const {getUser} = getKindeServerSession();
     const user = await getUser();
     if (!user) return;
 
@@ -22,6 +23,61 @@ export async function createRecipeAction(formData: FormData) {
 
     return redirect("/recipes/edit")
 }
+
+export async function getAllRecipesAction() {
+  const data = await prisma.recipe.findMany({
+    select: {
+      name: true,
+      kkal:true,
+      description: true,
+      id: true,
+      createdAt:true,
+      ingredients: {
+        select: {
+          ingredient: {
+            select: {
+              id:true,
+              name: true
+            }
+          },
+          quantity: true
+        }
+      }
+    }
+  })
+  return data;
+}
+
+export async function getRecipeAction(recipeId: string) {
+    const user = await getUser();
+    if (!user) return;
+
+    const data = await prisma.recipe.findUnique({
+        where: {
+            id: recipeId
+        },
+        select: {
+            name: true,
+            kkal:true,
+            description: true,
+            id: true,
+            createdAt:true,
+            ingredients: {
+                select: {
+                ingredient: {
+                    select: {
+                    id:true,
+                    name: true
+                    }
+                },
+                quantity: true
+                }
+            }
+        }
+    })
+    return data
+}
+
 
 export async function getCategoryAction() {
     const data = await prisma.category.findMany({

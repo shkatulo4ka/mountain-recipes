@@ -1,14 +1,12 @@
 import { createRecipeAction, getCategoryAction } from "@/app/_actions/recipeActions";
-import { prisma } from "@/app/utils/db";
-import { Button } from "@/components/ui/button";
+import SelectCategory from "@/components/general/SelectCategory";
+import SubmitButton from "@/components/general/SubmitButton"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue  } from "@/components/ui/select";
 
 
 export default async function CreateRecipe() {
-    const categories = await getCategoryAction();
 
     return(
         <div className="m-2">
@@ -25,20 +23,9 @@ export default async function CreateRecipe() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <Label>Категория</Label>
-                            <Select name="categoryId">
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Выбери категорию"/>
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {categories.map(({name, id}) => (
-                                        <SelectItem key={id} value={id}>
-                                            {name}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                            <SelectCategory/>
                         </div>
-                        <Button>Создать</Button>
+                        <SubmitButton/>
                     </form>
                 </CardContent>
             </Card>
