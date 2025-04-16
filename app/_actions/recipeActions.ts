@@ -8,12 +8,12 @@ const {getUser} = getKindeServerSession();
 
 export async function createRecipeAction(formData: FormData) {
     const user = await getUser();
-    if (!user) return;
+    if (!user) return redirect('/api/auth/register');
 
     const name = formData.get('name');
     const categoryId = formData.get('categoryId');
 
-    const data = await prisma.recipe.create({
+    await prisma.recipe.create({
         data: {
             name: name as string,
             categoryID: categoryId as string,
@@ -50,7 +50,7 @@ export async function getAllRecipesAction() {
 
 export async function getRecipeAction(recipeId: string) {
     const user = await getUser();
-    if (!user) return;
+    if (!user) return redirect('/api/auth/register');
 
     const data = await prisma.recipe.findUnique({
         where: {
@@ -76,6 +76,28 @@ export async function getRecipeAction(recipeId: string) {
         }
     })
     return data
+}
+
+export async function updateRecipeAction(formData: FormData, recipeId: string) {
+    const user = await getUser();
+    if (!user) return redirect('/api/auth/register');
+
+    const name = formData.get('name');
+    const categoryId = formData.get('categoryId');
+    const description = formData.get('description')
+
+    const data = await prisma.recipe.update({
+        where: {
+            id: recipeId
+        },
+        data: {
+            name: name as string,
+            categoryID: categoryId as string,
+            description: description as string
+        }
+    })
+
+    return redirect("/recipes/edit")
 }
 
 
