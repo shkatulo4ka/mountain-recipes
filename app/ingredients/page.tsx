@@ -1,24 +1,23 @@
-import { prisma } from "../utils/db"
+import { prisma } from "../utils/db";
 
-const Ingredients = async() => {
-
-
+const Ingredients = async () => {
   const data = await prisma.ingredient.findMany({
     select: {
       name: true,
       kkal: true,
-      price:true
-    }
-  })
+      price: true,
+    },
+  });
   return (
     <div>
       <div>IngredientsPage</div>
-      <div>{data.map(item => (
-        <h1>{item.name}</h1>
-      ))}
+      <div>
+        {data.map((item) => (
+          <h1>{item.name}</h1>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Ingredients
+export default Ingredients;

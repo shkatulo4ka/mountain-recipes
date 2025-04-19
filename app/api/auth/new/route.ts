@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 import { prisma } from "@/app/utils/db";
 
-
 // to use need add this route to KINDE_POST_LOGIN_REDIRECT_URL
 export async function GET() {
   noStore();
