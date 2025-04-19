@@ -64,6 +64,7 @@ export async function getRecipeAction(recipeId: string) {
       createdAt: true,
       ingredients: {
         select: {
+          id: true,
           ingredient: {
             select: {
               id: true,
@@ -86,7 +87,7 @@ export async function updateRecipeAction(formData: FormData, recipeId: string) {
   const categoryId = formData.get("categoryId");
   const description = formData.get("description");
 
-  const data = await prisma.recipe.update({
+  await prisma.recipe.update({
     where: {
       id: recipeId,
     },

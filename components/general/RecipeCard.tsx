@@ -1,21 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { IBaseRecipe } from "@/app/_interfaces/recipe.interfaces";
+
 interface IRecipeCardProps {
-  data: {
-    id: string;
-    createdAt: Date;
-    name: string;
-    description: string | null;
-    kkal: number | null;
-    ingredients: {
-      ingredient: {
-        id: string;
-        name: string;
-      };
-      quantity: number | null;
-    }[];
-  };
+  data: IBaseRecipe;
 }
 
 const RecipeCard = ({ data }: IRecipeCardProps) => {
@@ -24,7 +12,7 @@ const RecipeCard = ({ data }: IRecipeCardProps) => {
       className="group relative overflow-hidden rounded-lg border-gray-200 
     bg-white shadow-md transition-all hover: shadow-lg"
     >
-      <Link href={`/post/${data.id}`} className="block w-full h-full">
+      <Link href={`/recipes/${data.id}`} className="block w-full h-full">
         <h1 className="text-2xl text-gray-900 items-center font-semibold m-4">{data.name}</h1>
 
         <p className="text-md font-md text-gray-600 line-clamp-2 m-4">{data.description}</p>

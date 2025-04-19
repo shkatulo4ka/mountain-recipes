@@ -1,0 +1,24 @@
+import { FC } from "react";
+
+import { SubmitButton } from "../Buttons";
+import { addIngridientAction } from "@/app/_actions/recipeIngredientsActions";
+
+interface IConnectImagesFormWithData {
+  recipeId: string;
+  userId: string;
+}
+
+const AddIngridientForm: FC<IConnectImagesFormWithData> = async ({ recipeId, userId }) => {
+  // todo
+  // const data = await getIngridients(userId);
+  console.log("get user(?) ingridients", userId, recipeId);
+
+  return (
+    <form action={addIngridientAction}>
+      <input type="hidden" name="recipeId" value={recipeId} />
+      <SubmitButton title="Add Ingridient to Recipe" />
+    </form>
+  );
+};
+
+export default AddIngridientForm;
