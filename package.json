@@ -7,11 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint './app/**/*.{js,ts,tsx}' './components/**/*.{js,ts,tsx}' --quiet",
-    "fix": "eslint './app/**/*.{js,ts,tsx}' './components/**/*.{js,ts,tsx}' --fix"
+    "fix": "eslint './app/**/*.{js,ts,tsx}' './components/**/*.{js,ts,tsx}' --fix",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.6.1",
-    "@prisma/client": "^6.6.0",
+    "@prisma/client": "^6.5.0",
     "@radix-ui/react-label": "^2.1.3",
     "@radix-ui/react-select": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.0",
