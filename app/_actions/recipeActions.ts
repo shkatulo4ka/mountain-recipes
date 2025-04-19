@@ -13,7 +13,7 @@ export async function createRecipeAction(formData: FormData) {
   const name = formData.get("name");
   const categoryId = formData.get("categoryId");
 
-  await prisma.recipe.create({
+  const newRecipe = await prisma.recipe.create({
     data: {
       name: name as string,
       categoryID: categoryId as string,
@@ -21,7 +21,7 @@ export async function createRecipeAction(formData: FormData) {
     },
   });
 
-  return redirect("/recipes/edit");
+  return redirect(`/recipes/${newRecipe.id}`);
 }
 
 export async function getAllRecipesAction() {

@@ -3,12 +3,12 @@ import { FC } from "react";
 import { SubmitButton } from "../Buttons";
 import { addIngridientAction } from "@/app/_actions/recipeIngredientsActions";
 
-interface IConnectImagesFormWithData {
+interface IAddIngridientForm {
   recipeId: string;
   userId: string;
 }
 
-const AddIngridientForm: FC<IConnectImagesFormWithData> = async ({ recipeId, userId }) => {
+const AddIngridientForm: FC<IAddIngridientForm> = async ({ recipeId, userId }) => {
   // todo
   // const data = await getIngridients(userId);
   console.log("get user(?) ingridients", userId, recipeId);
