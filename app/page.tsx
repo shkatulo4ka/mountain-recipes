@@ -1,5 +1,5 @@
 const Home = async () => {
-  <div>Главная страница</div>
-}
- 
+  <div>Главная страница</div>;
+};
+
 export default Home;
