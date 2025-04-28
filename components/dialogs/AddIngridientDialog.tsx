@@ -13,12 +13,12 @@ const AddIngridientDialog: FC<IAddIngridientDialog> = (props) => (
   <Dialog>
     <DialogTrigger asChild>
       <div>
-        <BlueRoundButton label="Add Ingridient" />
+        <BlueRoundButton label="Add Ingredient" />
       </div>
     </DialogTrigger>
     <DialogContent className="sm:max-w-[600px]">
       <DialogHeader>
-        <DialogTitle>Add Ingridient</DialogTitle>
+        <DialogTitle>Add Ingredient</DialogTitle>
         <DialogDescription>... and his quantity</DialogDescription>
       </DialogHeader>
       <AddIngridientForm {...props} />

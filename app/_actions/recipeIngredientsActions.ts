@@ -9,19 +9,16 @@ const { getUser } = getKindeServerSession();
 
 export const addIngridientAction = async (formData: FormData) => {
   const recipeID = formData.get("recipeId") as string;
-  const ingredientId = "842ba14b-7d2d-4cd7-a620-2744053e1673"; // todo: id from select!
-  const quantity = 30; // todo const quantity = formData.get("quantity");
+  const ingredientId = formData.get("ingredientId") as string;
+  const quantity = Number(formData.get("quantity"));
   const pathName = `/recipes/${recipeID}`;
 
-  const data = await prisma.recipe_Ingredients.create({
-    data: {
-      recipeID,
-      ingredientId,
-      quantity,
-    },
-  });
+  const data = { recipeID, ingredientId, quantity };
+  console.log("add: ", data, pathName);
 
-  console.log("ingredient added", data);
+  const newdata = await prisma.recipe_Ingredients.create({ data });
+
+  console.log("ingredient added", newdata);
 
   revalidatePath(pathName);
 };

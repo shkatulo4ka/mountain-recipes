@@ -15,12 +15,11 @@ interface ISelectItem {
 
 interface ISelectWithSearch {
   inputName: string;
-  onSelect?: (item: ISelectItem | string) => void; // todo: check type!
   options: ISelectItem[];
   title: string;
 }
 
-const SelectWithSearch: FC<ISelectWithSearch> = ({ inputName, onSelect, options, title }) => {
+const SelectWithSearch: FC<ISelectWithSearch> = ({ inputName, options, title }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
@@ -47,7 +46,6 @@ const SelectWithSearch: FC<ISelectWithSearch> = ({ inputName, onSelect, options,
                   onSelect={(currentValue: string) => {
                     const newValue = currentValue === value ? "" : currentValue;
                     setValue(newValue);
-                    if (onSelect) onSelect(newValue);
                     const tempInput = document.getElementById(inputName);
                     tempInput?.setAttribute("value", item.value);
                     setOpen(false);
