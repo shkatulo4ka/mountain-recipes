@@ -2,6 +2,7 @@ export interface IIngridientInRecipe {
   ingredient: {
     id: string;
     name: string;
+    kkal: number;
   };
   quantity: number | null;
 }

@@ -38,6 +38,7 @@ export async function getAllRecipesAction() {
             select: {
               id: true,
               name: true,
+              kkal: true,
             },
           },
           quantity: true,
@@ -69,6 +70,7 @@ export async function getRecipeAction(recipeId: string) {
             select: {
               id: true,
               name: true,
+              kkal: true,
             },
           },
           quantity: true,
