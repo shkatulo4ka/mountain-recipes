@@ -13,7 +13,7 @@ const Ingredients = async () => {
       <div>IngredientsPage</div>
       <div>
         {data.map((item) => (
-          <h1>{item.name}</h1>
+          <h1 key={item.name}>{item.name}</h1>
         ))}
       </div>
     </div>

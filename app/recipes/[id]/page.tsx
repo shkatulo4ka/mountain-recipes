@@ -3,6 +3,7 @@ import { FC } from "react";
 
 import { getRecipeAction } from "@/app/_actions/recipeActions";
 import AddIngridientDialog from "@/components/dialogs/AddIngridientDialog";
+import { notFound } from "next/navigation";
 
 interface IDetailPage {
   params: Promise<{ id: string }>;
@@ -11,6 +12,9 @@ interface IDetailPage {
 const DetailPage: FC<IDetailPage> = async ({ params }) => {
   const { id } = await params;
   const data = await getRecipeAction(id);
+  if (!data) {
+    return notFound();
+  }
 
   console.log(data);
 
