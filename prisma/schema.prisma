@@ -20,6 +20,7 @@ model User {
   name           String
   profileImage   String?
   createdRecipes Recipe[]
+  hikings        Hiking[]
 }
 
 model Recipe {
@@ -33,6 +34,7 @@ model Recipe {
   categoryID  String?
   category    Category?            @relation(fields: [categoryID], references: [id])
   createdAt   DateTime             @default(now())
+  eatings     Eating[]
 }
 
 model Category {
@@ -57,4 +59,26 @@ model Recipe_Ingredients {
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String
   quantity     Float?
+}
+
+model Hiking {
+  id        String @id @default(uuid())
+  name      String
+  daysTotal Int
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Eating {
+  id           String      @id @default(uuid())
+  dayNumber    Int
+  eatingTimeId String
+  eatingTime   Eating_Time @relation(fields: [eatingTimeId], references: [id])
+  recipes      Recipe[]
+}
+
+model Eating_Time {
+  id     String   @id @default(uuid())
+  name   String   @unique
+  eating Eating[]
 }

@@ -43,3 +43,28 @@ export async function getRecipeIngredientsAction(recipeId: string) {
 
   return data;
 }
+
+export async function deleteIngredientOfRecipeAction(ingredient_in_recipe_id: string) {
+  const user = await getUser();
+  if (!user) return;
+  
+  await prisma.recipe_Ingredients.delete({
+    where: {
+      id: ingredient_in_recipe_id
+    }
+  })
+}
+
+export async function updateIngredientInRecipeAction(ingredient_in_recipe_id:string, quantity: number) {
+    const user = await getUser();
+    if (!user) return;
+
+    await prisma.recipe_Ingredients.update({
+      where: {
+        id: ingredient_in_recipe_id
+      },
+      data: {
+        quantity: quantity
+      }
+    })
+}

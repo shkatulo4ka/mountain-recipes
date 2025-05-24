@@ -112,3 +112,14 @@ export async function getCategoryAction() {
   });
   return data;
 }
+
+export async function deleteRecipeAction(recipeId:string) {
+    const user = await getUser();
+  if (!user) return redirect("/api/auth/register");
+
+  await prisma.recipe.delete({
+    where: {
+      id: recipeId
+    }
+  })
+}
