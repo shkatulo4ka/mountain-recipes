@@ -25,11 +25,20 @@ export async function createEatingAction(formData: FormData) {
     return newEating.id;
 }
 
-export async function updateEatingAction(eatingId: string, recipeId:string) {
-    prisma.eating_to_Recipe.create({
+export async function updateEatingAction(formData: FormData) {
+    const eatingId = formData.get("eatingId ");
+    const recipeId = formData.get('recipeId')
+
+    const eating = await prisma.eating.update({
+        where: {
+            id: eatingId as string
+        },
         data: {
-            recipeId,
-            eatingId
+            recipes: {
+                connect: {
+                    id: recipeId as string
+                }
+            }
             }
         }
     )
