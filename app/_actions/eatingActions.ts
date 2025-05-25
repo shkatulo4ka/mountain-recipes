@@ -54,12 +54,23 @@ export async function deleteEatingAction(eatingId: string) {
     )
 }
 
-export async function getDayEatingsAction(hikindId: string, dayNumber: number) {
-    const dayEatings = await prisma.eating.findMany({
+export async function getHikingEatingsAction(hikindId: string) {
+    const eatings = await prisma.eating.findMany({
         where:{
-            hikingId: hikindId,
-            dayNumber: dayNumber
+            hikingId: hikindId
+        },
+        select: {
+            id: true,
+            hikingId: true,
+            dayNumber: true,
+            eatingTimeId: true,
+            recipes: {
+                select: {
+                    id: true,
+                    name: true
+                }
+            }
         }
     })
-
+    return eatings
 }

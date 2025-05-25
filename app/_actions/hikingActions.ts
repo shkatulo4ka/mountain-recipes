@@ -13,6 +13,10 @@ export async function getAllHikingsAction() {
     const allHikings = await prisma.hiking.findMany({
         where:{
             userId: user.id
+        },
+        select: {
+            id: true,
+            name: true
         }
     })
 
@@ -26,6 +30,11 @@ export async function getHikingAction(id: string) {
     const hiking = await prisma.hiking.findUnique({
         where:{
             id
+        },
+        select: {
+            id: true,
+            name: true,
+            daysTotal: true
         }
     })
 
