@@ -15,3 +15,14 @@ export interface IBaseRecipe {
   kkal: number | null;
   ingredients: IIngridientInRecipe[];
 }
+
+export interface IEating {
+  id: string;
+  hikingId: string;
+  dayNumber: number;
+  eatingTimeId: string;
+  recipes?: {
+    name: string,
+    id: string
+  }[]
+}

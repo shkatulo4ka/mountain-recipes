@@ -43,3 +43,34 @@ export async function updateEatingAction(formData: FormData) {
         }
     )
 }
+
+export async function deleteEatingAction(eatingId: string) {
+    
+    const eating = await prisma.eating.delete({
+        where: {
+            id: eatingId as string
+        }
+      }
+    )
+}
+
+export async function getHikingEatingsAction(hikindId: string) {
+    const eatings = await prisma.eating.findMany({
+        where:{
+            hikingId: hikindId
+        },
+        select: {
+            id: true,
+            hikingId: true,
+            dayNumber: true,
+            eatingTimeId: true,
+            recipes: {
+                select: {
+                    id: true,
+                    name: true
+                }
+            }
+        }
+    })
+    return eatings
+}
