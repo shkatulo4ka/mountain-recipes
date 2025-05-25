@@ -6,8 +6,33 @@ import { redirect } from "next/navigation";
 
 const { getUser } = getKindeServerSession();
 
+export async function getAllHikingsAction() {
+    const user = await getUser();
+    if (!user) return redirect("/api/auth/register");
 
-export async function createHiking(formData: FormData) {
+    const allHikings = await prisma.hiking.findMany({
+        where:{
+            userId: user.id
+        }
+    })
+
+    return allHikings
+}
+
+export async function getHikingAction(id: string) {
+    const user = await getUser();
+    if (!user) return redirect("/api/auth/register");
+
+    const hiking = await prisma.hiking.findUnique({
+        where:{
+            id
+        }
+    })
+
+    return hiking
+}
+
+export async function createHikingAction(formData: FormData) {
     const user = await getUser();
     if (!user) return redirect("/api/auth/register");
 
@@ -34,4 +59,24 @@ export async function deleteHikingAction(hikingID:string) {
             id: hikingID
         }
     })
+}
+
+export async function updateHikingAction(formData: FormData) {
+    const user = await getUser();
+    if (!user) return redirect("/api/auth/register");
+
+    const hikingId = formData.get('hikindId');
+    const name = formData.get("name");
+    const daysTotal = Number(formData.get("daysTotal"));
+
+    const newHiking = await prisma.hiking.update({
+        where: {
+            id: hikingId as string
+        },
+        data: {
+            name: name as string,
+            daysTotal: daysTotal
+        },
+    });
+
 }

@@ -43,3 +43,23 @@ export async function updateEatingAction(formData: FormData) {
         }
     )
 }
+
+export async function deleteEatingAction(eatingId: string) {
+    
+    const eating = await prisma.eating.delete({
+        where: {
+            id: eatingId as string
+        }
+      }
+    )
+}
+
+export async function getDayEatingsAction(hikindId: string, dayNumber: number) {
+    const dayEatings = await prisma.eating.findMany({
+        where:{
+            hikingId: hikindId,
+            dayNumber: dayNumber
+        }
+    })
+
+}
