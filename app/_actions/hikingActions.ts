@@ -55,7 +55,7 @@ export async function createHikingAction(formData: FormData) {
             name: name as string,
             daysTotal: daysTotal,
             userId: user.id,
-            membersTotal
+            membersTotal: membersTotal
         },
     });
 
@@ -89,7 +89,7 @@ export async function updateHikingAction(formData: FormData) {
         data: {
             name: name as string,
             daysTotal: daysTotal,
-            membersTotal
+            membersTotal: membersTotal
         },
     });
 

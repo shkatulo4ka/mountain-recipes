@@ -32,11 +32,11 @@ const DaysTabs = ({daysTotal, membersTotal, data}: IDaysTabsProps) => {
             {arr.map((el,i) => <TabsTrigger value={`day${i+1}`} key={`day${i+1}`}>День {i+1}</TabsTrigger> )}
         </TabsList>
         {arr.map((el,i) => {
-            const dayEatings = data.filter(eating => eating.dayNumber == i)
+            const dayEatings = data.filter(eating => eating.dayNumber == i+1)
             return (
                 <TabsContent  value={`day${i+1}`} key={`day${i+1}`}>
                     <div className='w-[600px]'>
-                        В этот день у тебя {data.length} приемов пищи
+                        В этот день у тебя {dayEatings.length} приемов пищи
                     </div>
                 </TabsContent>
             )
