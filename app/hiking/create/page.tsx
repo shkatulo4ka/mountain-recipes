@@ -22,6 +22,10 @@ export default async function CreateHiking() {
               <Label>Количество дней</Label>
               <Input name="daysTotal" required type="number" placeholder="Введи количество дней похода" />
             </div>
+            <div className="flex flex-col gap-2">
+              <Label>Количество участников</Label>
+              <Input name="membersTotal" required type="number" placeholder="Введи количество участников" />
+            </div>
             <SubmitButton />
           </form>
         </CardContent>

@@ -34,7 +34,8 @@ export async function getHikingAction(id: string) {
         select: {
             id: true,
             name: true,
-            daysTotal: true
+            daysTotal: true,
+            membersTotal: true
         }
     })
 
@@ -47,12 +48,14 @@ export async function createHikingAction(formData: FormData) {
 
     const name = formData.get("name");
     const daysTotal = Number(formData.get("daysTotal"));
+    const membersTotal = Number(formData.get("membersTotal"));
 
     const newHiking = await prisma.hiking.create({
         data: {
             name: name as string,
             daysTotal: daysTotal,
             userId: user.id,
+            membersTotal
         },
     });
 
@@ -77,6 +80,7 @@ export async function updateHikingAction(formData: FormData) {
     const hikingId = formData.get('hikindId');
     const name = formData.get("name");
     const daysTotal = Number(formData.get("daysTotal"));
+    const membersTotal = Number(formData.get("membersTotal"));
 
     const newHiking = await prisma.hiking.update({
         where: {
@@ -84,7 +88,8 @@ export async function updateHikingAction(formData: FormData) {
         },
         data: {
             name: name as string,
-            daysTotal: daysTotal
+            daysTotal: daysTotal,
+            membersTotal
         },
     });
 

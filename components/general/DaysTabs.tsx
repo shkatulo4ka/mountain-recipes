@@ -19,10 +19,11 @@ import {
 
 interface IDaysTabsProps {
     daysTotal: number,
+    membersTotal: number,
     data: IEating[];
 }
 
-const DaysTabs = ({daysTotal, data}: IDaysTabsProps) => {
+const DaysTabs = ({daysTotal, membersTotal, data}: IDaysTabsProps) => {
     const arr = new Array(daysTotal).fill(0);
 
     return (

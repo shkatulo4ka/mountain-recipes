@@ -27,7 +27,7 @@ const DetailHikingPage: FC<IDetailPage> = async ({ params }) => {
   return (
     <div>
       <h1 className="text-2xl text-gray-900 items-center font-semibold m-4">{hiking?.name}</h1>
-      <DaysTabs daysTotal={hiking.daysTotal} data={eatingData}/> 
+      <DaysTabs daysTotal={hiking.daysTotal} membersTotal={hiking.membersTotal} data={eatingData}/> 
     </div>
   );
 };
