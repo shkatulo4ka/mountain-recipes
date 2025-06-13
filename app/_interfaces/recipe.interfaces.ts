@@ -22,7 +22,7 @@ export interface IEating {
   dayNumber: number;
   eatingTimeId: string;
   recipes?: {
-    name: string,
-    id: string
-  }[]
+    name: string;
+    id: string;
+  }[];
 }

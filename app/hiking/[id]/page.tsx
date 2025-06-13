@@ -1,4 +1,4 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { FC } from "react";
 
 import { notFound } from "next/navigation";
@@ -21,13 +21,13 @@ const DetailHikingPage: FC<IDetailPage> = async ({ params }) => {
 
   console.log(eatingData);
 
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  // const { getUser } = getKindeServerSession();
+  // const user = await getUser();
 
   return (
     <div>
       <h1 className="text-2xl text-gray-900 items-center font-semibold m-4">{hiking?.name}</h1>
-      <DaysTabs daysTotal={hiking.daysTotal} membersTotal={hiking.membersTotal} data={eatingData}/> 
+      <DaysTabs daysTotal={hiking.daysTotal} membersTotal={hiking.membersTotal} data={eatingData} />
     </div>
   );
 };

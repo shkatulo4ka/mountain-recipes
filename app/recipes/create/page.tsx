@@ -1,4 +1,4 @@
-import { createRecipeAction, getCategoryAction } from "@/app/_actions/recipeActions";
+import { createRecipeAction } from "@/app/_actions/recipeActions";
 import SelectCategory from "@/components/general/SelectCategory";
 import SubmitButton from "@/components/general/SubmitButton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";

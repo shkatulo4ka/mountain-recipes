@@ -25,9 +25,9 @@ async function AllHikings() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grod-cols-3 gap-4">
       {data.map((item) => (
         <div key={item.id} className="hover:text-blue-500 transition-colors">
-            <Link key={item.id} href={`/hiking/${item.id}`}>
-                {item.name}
-            </Link>
+          <Link key={item.id} href={`/hiking/${item.id}`}>
+            {item.name}
+          </Link>
         </div>
       ))}
     </div>

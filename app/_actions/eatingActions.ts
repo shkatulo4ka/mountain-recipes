@@ -7,70 +7,67 @@ import { redirect } from "next/navigation";
 const { getUser } = getKindeServerSession();
 
 export async function createEatingAction(formData: FormData) {
-    const user = await getUser();
-    if (!user) return redirect("/api/auth/register");
+  const user = await getUser();
+  if (!user) return redirect("/api/auth/register");
 
-    const eatingTimeId = formData.get("eatingTimeId ");
-    const dayNumber = Number(formData.get("dayNumber"));
-    const hikingId = formData.get('hikingId')
+  const eatingTimeId = formData.get("eatingTimeId ");
+  const dayNumber = Number(formData.get("dayNumber"));
+  const hikingId = formData.get("hikingId");
 
-        const newEating = await prisma.eating.create({
-        data: {
-            eatingTimeId: eatingTimeId as string,
-            dayNumber: dayNumber,
-            hikingId: hikingId as string
-        },
-    });
+  const newEating = await prisma.eating.create({
+    data: {
+      eatingTimeId: eatingTimeId as string,
+      dayNumber: dayNumber,
+      hikingId: hikingId as string,
+    },
+  });
 
-    return newEating.id;
+  return newEating.id;
 }
 
 export async function updateEatingAction(formData: FormData) {
-    const eatingId = formData.get("eatingId ");
-    const recipeId = formData.get('recipeId')
+  const eatingId = formData.get("eatingId ");
+  const recipeId = formData.get("recipeId");
 
-    const eating = await prisma.eating.update({
-        where: {
-            id: eatingId as string
+  await prisma.eating.update({
+    where: {
+      id: eatingId as string,
+    },
+    data: {
+      recipes: {
+        connect: {
+          id: recipeId as string,
         },
-        data: {
-            recipes: {
-                connect: {
-                    id: recipeId as string
-                }
-            }
-            }
-        }
-    )
+      },
+    },
+  });
 }
 
 export async function deleteEatingAction(eatingId: string) {
-    
-    const eating = await prisma.eating.delete({
-        where: {
-            id: eatingId as string
-        }
-      }
-    )
+  await prisma.eating.delete({
+    where: {
+      id: eatingId as string,
+    },
+  });
 }
 
 export async function getHikingEatingsAction(hikindId: string) {
-    const eatings = await prisma.eating.findMany({
-        where:{
-            hikingId: hikindId
-        },
+  const eatings = await prisma.eating.findMany({
+    where: {
+      hikingId: hikindId,
+    },
+    select: {
+      id: true,
+      hikingId: true,
+      dayNumber: true,
+      eatingTimeId: true,
+      recipes: {
         select: {
-            id: true,
-            hikingId: true,
-            dayNumber: true,
-            eatingTimeId: true,
-            recipes: {
-                select: {
-                    id: true,
-                    name: true
-                }
-            }
-        }
-    })
-    return eatings
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
+  return eatings;
 }
