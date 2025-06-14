@@ -2,10 +2,12 @@ import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import NavLink from "./NavLink";
 
 const Navbar = async () => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
   return (
     <nav className="py-5 flex items-center justify-between">
       <div className="flex items-center gap-6">
@@ -15,26 +17,10 @@ const Navbar = async () => {
           </h1>
         </Link>
 
-        <div className="hidden sm:flex items-center gap-6">
-          <Link className="text-sm font-medium hover:text-blue-500 transition-colors" href="/">
-            Home
-          </Link>
-        </div>
-        <div className="hidden sm:flex items-center gap-6">
-          <Link className="text-sm font-medium hover:text-blue-500 transition-colors" href="/hiking">
-            Hikings
-          </Link>
-        </div>
-        <div className="hidden sm:flex items-center gap-6">
-          <Link className="text-sm font-medium hover:text-blue-500 transition-colors" href="/recipes">
-            Recipes
-          </Link>
-        </div>
-        <div className="hidden sm:flex items-center gap-6">
-          <Link className="text-sm font-medium hover:text-blue-500 transition-colors" href="/ingredients">
-            Ingredients
-          </Link>
-        </div>
+        <NavLink href="/" title="home" />
+        <NavLink href="/hiking" title="hiking" />
+        <NavLink href="/recipes" title="recipes" />
+        <NavLink href="/ingredients" title="ingredients" />
       </div>
 
       {user ? (
