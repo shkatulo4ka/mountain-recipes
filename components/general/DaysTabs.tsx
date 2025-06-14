@@ -8,22 +8,24 @@ interface IDaysTabsProps {
 }
 
 const DaysTabs = ({ daysTotal, data }: IDaysTabsProps) => {
-  const arr = new Array(daysTotal).fill(0);
+  const dayNumbers = Array.from({ length: daysTotal }, (_, i) => i + 1);
 
   return (
     <Tabs defaultValue="day1" className="w-[800px] flex-row" orientation="vertical">
       <TabsList className="grid w-full grid-cols-1">
-        {arr.map((el, i) => (
-          <TabsTrigger value={`day${i + 1}`} key={`day${i + 1}`}>
-            День {i + 1}
+        {dayNumbers.map((day) => (
+          <TabsTrigger value={`day${day}`} key={`day${day}`}>
+            День {day}
           </TabsTrigger>
         ))}
       </TabsList>
-      {arr.map((el, i) => {
-        const dayEatings = data.filter((eating) => eating.dayNumber == i + 1);
+      {dayNumbers.map((day) => {
+        const dayEatings = data.filter((eating) => eating.dayNumber == day);
         return (
-          <TabsContent value={`day${i + 1}`} key={`day${i + 1}`}>
-            <div className="w-[600px]">В этот день у тебя {dayEatings.length} приемов пищи</div>
+          <TabsContent value={`day${day}`} key={`day${day}`}>
+            <div className="w-[600px]">
+              День {day}. В этот день у тебя {dayEatings.length} приемов пищи
+            </div>
           </TabsContent>
         );
       })}

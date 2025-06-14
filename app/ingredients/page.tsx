@@ -1,19 +1,17 @@
-import { prisma } from "../utils/db";
+import { getAllIngredientsAction } from "../_actions/ingredientActions";
 
 const Ingredients = async () => {
-  const data = await prisma.ingredient.findMany({
-    select: {
-      name: true,
-      kkal: true,
-      price: true,
-    },
-  });
+  const data = await getAllIngredientsAction();
+  console.log(data);
+
   return (
     <div>
       <div>IngredientsPage</div>
       <div>
         {data.map((item) => (
-          <h1 key={item.name}>{item.name}</h1>
+          <h1 key={item.id}>
+            {item.name} ({item.id})
+          </h1>
         ))}
       </div>
     </div>
