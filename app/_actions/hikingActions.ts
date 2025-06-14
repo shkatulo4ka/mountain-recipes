@@ -11,9 +11,7 @@ export async function getAllHikingsAction() {
   if (!user) return redirect("/api/auth/register");
 
   const allHikings = await prisma.hiking.findMany({
-    where: {
-      userId: user.id,
-    },
+    // where: { userId: user.id }, // todo: вернуть, когда пользователи начнут появляться!
     select: {
       id: true,
       name: true,

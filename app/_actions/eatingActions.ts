@@ -13,12 +13,14 @@ export async function createEatingAction(formData: FormData) {
   const eatingTimeId = formData.get("eatingTimeId ");
   const dayNumber = Number(formData.get("dayNumber"));
   const hikingId = formData.get("hikingId");
+  const recipeId = formData.get("recipeId");
 
   const newEating = await prisma.eating.create({
     data: {
       eatingTimeId: eatingTimeId as string,
       dayNumber: dayNumber,
       hikingId: hikingId as string,
+      recipeId: recipeId as string,
     },
   });
 
@@ -34,7 +36,7 @@ export async function updateEatingAction(formData: FormData) {
       id: eatingId as string,
     },
     data: {
-      recipes: {
+      recipe: {
         connect: {
           id: recipeId as string,
         },
@@ -61,7 +63,7 @@ export async function getHikingEatingsAction(hikindId: string) {
       hikingId: true,
       dayNumber: true,
       eatingTimeId: true,
-      recipes: {
+      recipe: {
         select: {
           id: true,
           name: true,
