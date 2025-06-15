@@ -21,8 +21,8 @@ export interface IEating {
   hikingId: string;
   dayNumber: number;
   eatingTimeId: string;
-  recipes?: {
+  recipe: {
     name: string;
     id: string;
-  }[];
+  };
 }
